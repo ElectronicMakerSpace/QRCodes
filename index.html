@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRCode</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/qrcode.js"></script>
+</head>
+<body class="bg-secondary text-white">
+	<div class="media justify-content-center container p-5">
+        <img class="align-self-center mr-3" src="img/black-box.jpg" alt="Black-Box Imagen">
+        <div class="media-body">
+		  <h2 class="mt-0">Generacion de Códigos Qr.</h2>
+		  <hr>
+          <p class="text-justify">Por favor Ingrese los datos requeridos en el programa y presione enter al llenar el campo nombre, posteriormente de clic derecho sobre la imagen y guardela para su distribucion.</p>
+        </div>
+	</div>
+	
+	<div class="container m-5 mx-auto">
+		<div class="row d-flex justify-content-center align-items-center">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="numero">Numero de Cliente</label>
+					<input class="form-control" id="numero" value="10" type="text" placeholder="Ingrese el numero de cliente"/>
+				</div>
+
+				
+				<div class="form-group">
+					<label for="mes">Seleccione el mes</label>
+					<select id="mes" name="mes" class="custom-select">
+						<option value="1" selected>Enero</option>
+						<option value="2">Febrero</option>
+						<option value="3">Marzo</option>
+						<option value="4">Abril</option>
+						<option value="5">Mayo</option>
+						<option value="6">Junio</option>
+						<option value="7">Julio</option>
+						<option value="8">Agosto</option>
+						<option value="9">Septiembre</option>
+						<option value="10">Octubre</option>
+						<option value="11">Noviembre</option>
+						<option value="12">Diciembre</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="text">Nombre de Cliente</label>
+					<input  class="form-control" id="text" type="text" value="Gabriel Aleman" placeholder="Ingrese el nombre del cliente" />
+				</div>
+
+				<div id="qrcode" style="width:100px; height:100px; margin-top:15px;"></div>
+				
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+<script type="text/javascript">
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+	width : 300,
+	height : 300
+});
+
+function makeCode () {		
+	var elText = document.getElementById("text");
+	var elNum = document.getElementById("numero");
+	var elMes = document.getElementById("mes");
+
+	if (!elText.value || elNum === '') {
+		alert("Algun campo esta vacío!");
+		elText.focus();
+		return;
+	}
+	
+	qrcode.makeCode('BLACK-BOX%'+ elNum.value +'#&'+ elText.value+'/mes='+ elMes.value +'?');
+}
+
+makeCode();
+
+$("#text").
+	on("blur", function () {
+		makeCode();
+	}).
+	on("keydown", function (e) {
+		if (e.keyCode == 13) {
+			makeCode();
+		}
+	});
+</script>
+</body>
