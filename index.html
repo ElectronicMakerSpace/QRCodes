@@ -12,12 +12,12 @@
     <script type="text/javascript" src="js/qrcode.js"></script>
 </head>
 <body class="text-white">
-	<div class="media justify-content-center container p-5">
+	<div class="media justify-content-center container p-3">
         <img class="align-self-center mr-3" src="img/black-box.jpg" alt="Black-Box Imagen">
         <div class="media-body">
 		  <h2 class="mt-0">Generacion de Códigos Qr.</h2>
 		  <hr>
-          <p class="text-justify">Por favor Ingrese los datos requeridos en el programa y presione el botón "Crear/Actualizar Qr", posteriormente de clic derecho sobre la imagen y guardela para su distribucion.</p>
+          <p class="text-justify">Por favor Ingrese los datos requeridos en el programa y presione el botón "Crear/Actualizar Qr", posteriormente de clic en descargar para su distribución.</p>
         </div>
 	</div>
 	
@@ -56,14 +56,26 @@
 
 				<button onclick="actualizarQr()" type="button" class="btn btn-block btn-dark" >Crear/Actualizar Qr</button>
 
-				<div id="qrcode" style="width:100px; height:100px; margin-top:15px; text-align: center;"></div>
-				
+				<div id="qrcode" style="width:100px; height:100px; margin-top:15px; text-align: center;"><img alt="Aquí aparecera el código qr"> </div>
+
+			</div>
+			<div class="col-md-3">
+			</div>
+		</div>
+		<br /><br /><br /><br /><br /><br /><br />
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<a id="resultado" href="#" download class="btn btn-primary btn-block" role="button" aria-pressed="true" onclick="descargarQr()" > Descargar Código Qr  </a>
 			</div>
 			<div class="col-md-3"></div>
 		</div>
 		<br /><br /><br /><br /><br />
 	</div>
 <script type="text/javascript">
+
+var imagen = '';
+
 var qrcode = new QRCode(document.getElementById("qrcode"), {
 	width : 300,
 	height : 300
@@ -78,6 +90,7 @@ function makeCode () {
 		alert("Algun campo esta vacío!");
 		elText.focus();
 		return;
+
 	}
 	
 	qrcode.makeCode('BLACK-BOX%'+ elNum.value +'#&'+ elText.value+'/mes='+ elMes.value +'?');
@@ -86,6 +99,15 @@ function makeCode () {
 //makeCode();
 function actualizarQr() {
 	makeCode();
+
+	//imagen = document.getElementById('qrcode').getElementsByTagName("img")[0];
+	//console.log(imagen.src);
+}
+
+function descargarQr() {
+	imagen = document.getElementById('qrcode').getElementsByTagName("img")[1];
+	//console.log(imagen.src);
+	$('a#resultado').prop('href',imagen.src);
 }
 
 $("#text").
@@ -98,6 +120,9 @@ $("#text").
 		}
 	});
 
+	//var imagen =  document.querySelectorAll('#qrcode img')[0].src;
+	//imagen = document.getElementById('qrcode').getElementsByTagName("img")[0];
+	//console.log(imagen.src);
 
 	// git push origin master
 </script>
