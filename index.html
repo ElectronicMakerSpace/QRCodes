@@ -56,7 +56,7 @@
 
 				<button onclick="actualizarQr()" type="button" class="btn btn-block btn-dark" >Crear/Actualizar Qr</button>
 
-				<div id="qrcode" style="width:100px; height:100px; margin-top:15px; text-align: center;"><img alt="Aquí aparecera el código qr"> </div>
+				<div id="qrcode" style="width:100px; height:100px; margin-top:15px; text-align: center;"></div>
 
 			</div>
 			<div class="col-md-3">
@@ -105,9 +105,9 @@ function actualizarQr() {
 }
 
 function descargarQr() {
-	imagen = document.getElementById('qrcode').getElementsByTagName("img")[1];
+	imagen = document.getElementById('qrcode').getElementsByTagName("img")[0];
 	//console.log(imagen.src);
-	$('a#resultado').prop('href',imagen.src);
+	$('a#resultado').prop('href', imagen.src);
 }
 
 $("#text").
